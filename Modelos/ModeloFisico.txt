@@ -1,0 +1,140 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+-- -----------------------------------------------------
+-- Schema locacaocarro
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema locacaocarro
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `locacaocarro` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`cliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`cliente` (
+  `idcli` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(50) NOT NULL,
+  `dtnasc` DATE NOT NULL,
+  `cpf` VARCHAR(20) NOT NULL,
+  `cnh` VARCHAR(20) NOT NULL,
+  `email` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`idcli`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`carro`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`carro` (
+  `idcar` INT NOT NULL AUTO_INCREMENT,
+  `marca` VARCHAR(50) NOT NULL,
+  `modelo` VARCHAR(50) NOT NULL,
+  `placa` VARCHAR(50) NOT NULL,
+  `cor` VARCHAR(20) NOT NULL,
+  `ano` INT(4) NOT NULL,
+  `disponivel` TINYINT NOT NULL,
+  PRIMARY KEY (`idcar`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`locacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`locacao` (
+  `idloc` INT NOT NULL,
+  `cliente_idcli` INT NOT NULL,
+  `carro_idcar` INT NOT NULL,
+  `data_locacao` DATE NOT NULL,
+  `data_devolucao` DATE NOT NULL,
+  `custo` DOUBLE NOT NULL,
+  PRIMARY KEY (`idloc`, `cliente_idcli`, `carro_idcar`),
+  INDEX `fk_cliente_has_carro_carro1_idx` (`carro_idcar` ASC) VISIBLE,
+  INDEX `fk_cliente_has_carro_cliente_idx` (`cliente_idcli` ASC) VISIBLE,
+  CONSTRAINT `fk_cliente_has_carro_cliente`
+    FOREIGN KEY (`cliente_idcli`)
+    REFERENCES `mydb`.`cliente` (`idcli`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cliente_has_carro_carro1`
+    FOREIGN KEY (`carro_idcar`)
+    REFERENCES `mydb`.`carro` (`idcar`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+USE `locacaocarro` ;
+
+-- -----------------------------------------------------
+-- Table `locacaocarro`.`carros`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `locacaocarro`.`carros` (
+  `idcar` INT NOT NULL AUTO_INCREMENT,
+  `marca` VARCHAR(50) NOT NULL,
+  `modelo` VARCHAR(50) NOT NULL,
+  `placa` VARCHAR(50) NOT NULL,
+  `cor` VARCHAR(20) NOT NULL,
+  `ano` INT NOT NULL,
+  `disponivel` TINYINT(1) NOT NULL,
+  PRIMARY KEY (`idcar`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `locacaocarro`.`clientes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `locacaocarro`.`clientes` (
+  `idcli` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(100) NOT NULL,
+  `dtnasc` DATE NOT NULL,
+  `cpf` VARCHAR(20) NOT NULL,
+  `cnh` VARCHAR(20) NOT NULL,
+  `email` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`idcli`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `locacaocarro`.`locacoes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `locacaocarro`.`locacoes` (
+  `idloc` INT NOT NULL AUTO_INCREMENT,
+  `id_cliente` INT NOT NULL,
+  `id_carro` INT NOT NULL,
+  `data_locacao` DATE NOT NULL,
+  `data_devolucao` DATE NOT NULL,
+  `custo` DOUBLE NOT NULL,
+  PRIMARY KEY (`idloc`),
+  INDEX `id_cliente` (`id_cliente` ASC) VISIBLE,
+  INDEX `id_carro` (`id_carro` ASC) VISIBLE,
+  CONSTRAINT `locacoes_ibfk_1`
+    FOREIGN KEY (`id_cliente`)
+    REFERENCES `locacaocarro`.`clientes` (`idcli`),
+  CONSTRAINT `locacoes_ibfk_2`
+    FOREIGN KEY (`id_carro`)
+    REFERENCES `locacaocarro`.`carros` (`idcar`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
