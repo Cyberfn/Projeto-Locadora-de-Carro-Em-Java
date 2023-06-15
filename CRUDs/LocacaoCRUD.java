@@ -10,8 +10,8 @@ public class LocacaoCRUD {
     static Connection conexao = dao.conectaDB();
 
     public static void criarLocacao(Locacao locacao) {
-        String query = "INSERT INTO Locacoes (id_cliente, id_carro, data_locacao, data_devolucao, custo) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement prep = conexao.prepareStatement(query)) {
+        String sql = "INSERT INTO Locacoes (id_cliente, id_carro, data_locacao, data_devolucao, custo) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement prep = conexao.prepareStatement(sql)) {
             prep.setLong(1, locacao.getId_cliente());
             prep.setLong(2, locacao.getId_carro());
             prep.setDate(3, new java.sql.Date(locacao.getData_locacao().getTime()));
@@ -50,8 +50,8 @@ public class LocacaoCRUD {
     }
 
     public static void atualizarLocacao(Locacao locacao) {
-        String query = "UPDATE Locacoes SET id_cliente=?, id_carro=?, data_locacao=?, data_devolucao=?, custo=?;";
-        try (PreparedStatement prep = conexao.prepareStatement(query)) {
+        String sql = "UPDATE Locacoes SET id_cliente=?, id_carro=?, data_locacao=?, data_devolucao=?, custo=?;";
+        try (PreparedStatement prep = conexao.prepareStatement(sql)) {
             prep.setLong(1, locacao.getId_cliente());
             prep.setLong(2, locacao.getId_carro());
             prep.setDate(3, new java.sql.Date(locacao.getData_locacao().getTime()));
@@ -67,8 +67,8 @@ public class LocacaoCRUD {
         }
     }
     public static void excluirLocacao(int idCliente, int idCarro) {
-        String query = "DELETE FROM Locacoes WHERE id_cliente = ? AND id_carro = ?";
-        try (PreparedStatement prep = conexao.prepareStatement(query)) {
+        String sql = "DELETE FROM Locacoes WHERE id_cliente = ? AND id_carro = ?";
+        try (PreparedStatement prep = conexao.prepareStatement(sql)) {
             prep.setInt(1, idCliente);
             prep.setInt(2, idCarro);
             int rowsAffected = prep.executeUpdate();
