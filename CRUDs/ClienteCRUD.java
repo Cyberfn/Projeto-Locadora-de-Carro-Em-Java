@@ -89,7 +89,7 @@ public class ClienteCRUD {
 	}
 
 	// Método para excluir um cliente
-	public static void excluirCliente(int id) {
+	public static void excluirCliente(Long id) {
 
 		String sql = "DELETE FROM clientes WHERE idcli = ?";
 
