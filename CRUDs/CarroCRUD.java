@@ -32,9 +32,7 @@ public class CarroCRUD {
 			statement.close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao criar o carro: " + e.getMessage());
-		} finally {
-
-		}
+		} 
 	}
 
 	// Método para listar todos os carros
@@ -66,9 +64,7 @@ public class CarroCRUD {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-
-		}
+		} 
 	}
 
 	// Método para atualizar um carro
@@ -90,9 +86,7 @@ public class CarroCRUD {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-
-		}
+		} 
 	}
 
 	// Método para excluir um carro
@@ -112,8 +106,6 @@ public class CarroCRUD {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-
-		}
+		} 
 	}
 }
