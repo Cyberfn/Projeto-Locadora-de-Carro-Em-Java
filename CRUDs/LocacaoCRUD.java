@@ -66,7 +66,7 @@ public class LocacaoCRUD {
             e.printStackTrace();
         }
     }
-    public static void excluirLocacao(int idCliente, int idCarro) {
+    public static void excluirLocacao(Long idCliente, Long idCarro) {
         String sql = "DELETE FROM Locacoes WHERE id_cliente = ? AND id_carro = ?";
         try (PreparedStatement prep = conexao.prepareStatement(sql)) {
             prep.setLong(1, idCliente);
