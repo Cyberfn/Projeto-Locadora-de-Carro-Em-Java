@@ -71,7 +71,8 @@ public class ClienteCRUD {
 
 		String sql = "UPDATE clientes SET nome = ?, dtnasc = ?, cpf = ?, cnh = ?, email = ? WHERE idcli = ?";
 
-		try (PreparedStatement prep = conexao.prepareStatement(sql)) {
+		try (
+			PreparedStatement prep = conexao.prepareStatement(sql)) {
 			prep.setString(1, cliente.getNome());
 			prep.setDate(2, new java.sql.Date(cliente.getDtnasc().getTime()));
 			prep.setString(3, cliente.getCpf());
