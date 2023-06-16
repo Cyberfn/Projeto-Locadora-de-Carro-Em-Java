@@ -30,8 +30,8 @@ public class LocacaoCRUD {
         try (PreparedStatement prep = conexao.prepareStatement(query)) {
             ResultSet resultSet = prep.executeQuery();
             while (resultSet.next()) {
-                int idCliente = resultSet.getInt("id_cliente");
-                int idCarro = resultSet.getInt("id_carro");
+                Long idCliente = resultSet.getInt("id_cliente");
+                Long idCarro = resultSet.getInt("id_carro");
                 Date dataLocacao = resultSet.getDate("data_locacao");
                 Date dataDevolucao = resultSet.getDate("data_devolucao");
                 double custo = resultSet.getDouble("custo");
@@ -69,8 +69,8 @@ public class LocacaoCRUD {
     public static void excluirLocacao(int idCliente, int idCarro) {
         String sql = "DELETE FROM Locacoes WHERE id_cliente = ? AND id_carro = ?";
         try (PreparedStatement prep = conexao.prepareStatement(sql)) {
-            prep.setInt(1, idCliente);
-            prep.setInt(2, idCarro);
+            prep.setLong(1, idCliente);
+            prep.setLong(2, idCarro);
             int rowsAffected = prep.executeUpdate();
 
             if (rowsAffected > 0) {
