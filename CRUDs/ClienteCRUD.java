@@ -32,9 +32,7 @@ public class ClienteCRUD {
 			statement.close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao criar o cliente: " + e.getMessage());
-		} finally {
-
-		}
+		} 
 	}
 
 	// Método para listar todos os clientes
@@ -65,9 +63,7 @@ public class ClienteCRUD {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-
-		}
+		} 
 	}
 
 	// Método para atualizar um cliente
@@ -88,9 +84,7 @@ public class ClienteCRUD {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-
-		}
+		} 
 	}
 
 	// Método para excluir um cliente
@@ -110,8 +104,6 @@ public class ClienteCRUD {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-
-		}
+		} 
 	}
 }
