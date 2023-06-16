@@ -43,7 +43,7 @@ public class CarroCRUD {
 			ResultSet rs = prep.executeQuery();
 
 			while (rs.next()) {
-				int idcar = rs.getInt("idcar");
+				Long idcar = rs.getInt("idcar");
 				String marca = rs.getString("marca");
 				String modelo = rs.getString("modelo");
 				String placa = rs.getString("placa");
@@ -95,7 +95,7 @@ public class CarroCRUD {
 		String sql = "DELETE FROM carros WHERE idcar = ?";
 
 		try (PreparedStatement prep = conexao.prepareStatement(sql)) {
-			prep.setInt(1, id);
+			prep.setLong(1, id);
 
 			int linhasAfetadas = prep.executeUpdate();
 			if (linhasAfetadas > 0) {
