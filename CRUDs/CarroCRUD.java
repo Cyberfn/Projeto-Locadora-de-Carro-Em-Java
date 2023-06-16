@@ -90,7 +90,7 @@ public class CarroCRUD {
 	}
 
 	// Método para excluir um carro
-	public static void excluirCarro(int id) {
+	public static void excluirCarro(Long id) {
 
 		String sql = "DELETE FROM carros WHERE idcar = ?";
 
