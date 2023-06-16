@@ -44,7 +44,7 @@ public class ClienteCRUD {
 			ResultSet rs = prep.executeQuery();
 
 			while (rs.next()) {
-				int id = rs.getInt("idcli");
+				Long id = rs.getInt("idcli");
 				String nome = rs.getString("nome");
 				Date dtnasc = rs.getDate("dtnasc");
 				String cpf = rs.getString("cpf");
@@ -94,7 +94,7 @@ public class ClienteCRUD {
 		String sql = "DELETE FROM clientes WHERE idcli = ?";
 
 		try (PreparedStatement prep = conexao.prepareStatement(sql)) {
-			prep.setInt(1, id);
+			prep.setLong(1, id);
 
 			int linhasAfetadas = prep.executeUpdate();
 			if (linhasAfetadas > 0) {
