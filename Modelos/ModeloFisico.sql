@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema locacaocarro
+-- Schema locacaocarros
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema locacaocarro
+-- Schema locacaocarros
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `locacaocarro` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `locacaocarro` ;
+CREATE SCHEMA IF NOT EXISTS `locacaocarros` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `locacaocarros` ;
 
 -- -----------------------------------------------------
--- Table `locacaocarro`.`carros`
+-- Table `locacaocarros`.`carros`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `locacaocarro`.`carros` (
+CREATE TABLE IF NOT EXISTS `locacaocarros`.`carros` (
   `idcar` INT NOT NULL AUTO_INCREMENT,
   `marca` VARCHAR(50) NOT NULL,
   `modelo` VARCHAR(50) NOT NULL,
@@ -33,9 +33,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `locacaocarro`.`clientes`
+-- Table `locacaocarros`.`clientes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `locacaocarro`.`clientes` (
+CREATE TABLE IF NOT EXISTS `locacaocarros`.`clientes` (
   `idcli` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `dtnasc` DATE NOT NULL,
@@ -50,9 +50,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `locacaocarro`.`locacoes`
+-- Table `locacaocarros`.`locacoes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `locacaocarro`.`locacoes` (
+CREATE TABLE IF NOT EXISTS `locacaocarros`.`locacoes` (
   `id_cliente` INT NOT NULL,
   `id_carro` INT NOT NULL,
   `data_locacao` DATE NOT NULL,
@@ -62,10 +62,10 @@ CREATE TABLE IF NOT EXISTS `locacaocarro`.`locacoes` (
   INDEX `id_carro` (`id_carro` ASC) VISIBLE,
   CONSTRAINT `locacoes_ibfk_1`
     FOREIGN KEY (`id_cliente`)
-    REFERENCES `locacaocarro`.`clientes` (`idcli`),
+    REFERENCES `locacaocarros`.`clientes` (`idcli`),
   CONSTRAINT `locacoes_ibfk_2`
     FOREIGN KEY (`id_carro`)
-    REFERENCES `locacaocarro`.`carros` (`idcar`))
+    REFERENCES `locacaocarros`.`carros` (`idcar`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
